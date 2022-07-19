@@ -12,7 +12,7 @@ jobs:
       - name: prepare jobs
         run: sudo apt-get install -y autopoint gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64
       - name: clone aria2
-        run: sudo git clone --depth 1 --branch release-1.36.0 https://github.com/aria2/aria2.git && cd aria2 && git checkout -b patch && git am -3 ../aria2-*.patch
+        run: sudo git clone --depth 1 --branch release-1.36.0 https://github.com/aria2/aria2.git && cd aria2 && sudo git checkout -b patch && sudo git am -3 ../aria2-*.patch
       - name: mingw-x86_64-w64-build-lib
         run: sudo bash ${{ github.workspace }}/build-scripts/mingw-config/aria2-x86_64-w64-mingw-build-libs
       - name: mingw-x86_64-w64-build-aria2    
