@@ -34,3 +34,5 @@ PREFIX=/usr/x86_64-w64-mingw32
     CPPFLAGS="-I$PREFIX/include" \
     LDFLAGS="-L$PREFIX/lib" \
     PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig"
+
+make

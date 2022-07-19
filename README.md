@@ -1,6 +1,8 @@
 aria2 static builds for GNU/Linux & Windows.
 ============================================
 
+all the patches are from: https://github.com/myfreeer/aria2-build-msys2
+
 ### aria2 1.36.0 builds (with OpenSSL):
 
   * **`GNU/Linux downloads:`**
