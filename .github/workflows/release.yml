@@ -10,13 +10,9 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - name: prepare jobs
-        run: cd ${{ github.workspace }} && \ 
-        sudo git clone https://github.com/aria2/aria2.git && \
-        cd aria2
+        run: cd ${{ github.workspace }} && sudo git clone https://github.com/aria2/aria2.git && cd aria2
       - name: mingw-x86_64-w64-build
-        run: bash ${{ github.workspace }}/build-scripts/mingw-config/aria2-x86_64-w64-mingw-build-libs && \ 
-        git clone 
-        bash ${{ github.workspace }}/build-scripts/mingw-config/aria2-x86_64-w64-mingw-config 
+        run: bash ${{ github.workspace }}/build-scripts/mingw-config/aria2-x86_64-w64-mingw-build-libs && bash ${{ github.workspace }}/build-scripts/mingw-config/aria2-x86_64-w64-mingw-config 
       - uses: actions/upload-artifact@v3
         with:
           name: build
