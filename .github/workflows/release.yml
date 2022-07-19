@@ -13,10 +13,8 @@ jobs:
         run: sudo apt-get install -y gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64
       - name: clone aria2
         run: sudo git clone https://github.com/aria2/aria2.git
-      - name: mingw-x86_64-w64-build-lib
-        run: bash ${{ github.workspace }}/build-scripts/mingw-config/aria2-x86_64-w64-mingw-build-libs
       - name: mingw-x86_64-w64-build-aria2
-        run: cd aria2 && bash ${{ github.workspace }}/build-scripts/mingw-config/aria2-x86_64-w64-mingw-config 
+        run: cd aria2 && autoreconf -i && bash ${{ github.workspace }}/build-scripts/mingw-config/aria2-x86_64-w64-mingw-config 
       - uses: actions/upload-artifact@v3
         with:
           name: build
