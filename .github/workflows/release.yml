@@ -1,0 +1,24 @@
+name: GitHub Actions Demo
+on: [push]
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - name: prepare jobs
+        run: cd ${{ github.workspace }} && \ 
+        sudo git clone https://github.com/aria2/aria2.git && \
+        cd aria2
+      - name: mingw-x86_64-w64-build
+        run: bash ${{ github.workspace }}/build-scripts/mingw-config/aria2-x86_64-w64-mingw-build-libs && \ 
+        git clone 
+        bash ${{ github.workspace }}/build-scripts/mingw-config/aria2-x86_64-w64-mingw-config 
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
