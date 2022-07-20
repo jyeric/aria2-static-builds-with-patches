@@ -34,3 +34,6 @@ PREFIX=/usr/i686-w64-mingw32
     CPPFLAGS="-I$PREFIX/include" \
     LDFLAGS="-L$PREFIX/lib" \
     PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig"
+
+make
+strip -s src/aria2c.exe

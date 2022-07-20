@@ -36,3 +36,4 @@ PREFIX=/usr/x86_64-w64-mingw32
     PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig"
 
 make
+strip -s src/aria2c.exe

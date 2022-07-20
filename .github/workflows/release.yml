@@ -1,7 +1,7 @@
 name: GitHub Actions Demo
 on: [push]
 jobs:
-  release:
+  Release-Windows-x86-64:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -17,8 +17,32 @@ jobs:
         run: sudo bash ${{ github.workspace }}/build-scripts/mingw-config/aria2-x86_64-w64-mingw-build-libs
       - name: mingw-x86_64-w64-build-aria2    
         run: cd aria2 && sudo autoreconf -i && sudo bash ${{ github.workspace }}/build-scripts/mingw-config/aria2-x86_64-w64-mingw-config 
+      - name: Packaging
+        run: mkdir aria2-1.36.0-win-x86-64 && cp aria2/src/aria2c.exe aria2-1.36.0-win-x86-64 && cp aria2/AUTHORS aria2-1.36.0-win-x86-64 && cp aria2/COPYING aria2-1.36.0-win-x86-64 && cp aria2/LICENSE.OpenSSL aria2-1.36.0-win-x86-64 && cp aria2/NEWS aria2-1.36.0-win-x86-64
       - uses: actions/upload-artifact@v3
         with:
-          name: build
-          path: ${{ github.workspace }}
+          name: aria2-1.36.0-win-x86-64
+          path: ${{ github.workspace }}/aria2-1.36.0-win-x86-64
       - run: echo "🍏 This job's status is ${{ job.status }}."
+  Release-Windows-i686:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - name: prepare jobs
+        run: sudo apt-get install -y autopoint gcc-mingw-w64-i686 g++-mingw-w64-i686
+      - name: clone aria2
+        run: sudo git clone --depth 1 --branch release-1.36.0 https://github.com/aria2/aria2.git && cd aria2 && sudo git checkout -b patch && sudo git am -3 ../aria2-*.patch
+      - name: mingw-i686-w64-build-lib
+        run: sudo bash ${{ github.workspace }}/build-scripts/mingw-config/aria2-i686-w64-mingw-build-libs
+      - name: mingw-i686-w64-build-aria2    
+        run: cd aria2 && sudo autoreconf -i && sudo bash ${{ github.workspace }}/build-scripts/mingw-config/aria2-i686-w64-mingw-config
+      - name: Packaging
+        run: mkdir aria2-1.36.0-win-i686 && cp aria2/src/aria2c.exe aria2-1.36.0-win-i686 && cp aria2/AUTHORS aria2-1.36.0-win-i686 && cp aria2/COPYING aria2-1.36.0-win-i686 && cp aria2/LICENSE.OpenSSL aria2-1.36.0-win-i686 && cp aria2/NEWS aria2-1.36.0-win-i686
+      - uses: actions/upload-artifact@v3
+        with:
+          name: aria2-1.36.0-win-i686
+          path: ${{ github.workspace }}/aria2-1.36.0-win-i686
